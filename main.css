@@ -1,0 +1,56 @@
+#map {
+  height: 50vh;
+  width: 35vw;
+  border: 2px lightgrey solid;
+  border-radius: 5px;
+  margin: 50px 0 0 25px;
+}
+
+body {
+  background-image: url('http://southerngaragebands.com/rapids.JPG');
+  background-size: cover;
+}
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.header {
+  width: 100%;
+  height: 125px;
+  border: 1px black solid;
+}
+.header h1 {
+  font-size: 72px;
+  color: #ccc;
+}
+.right {
+  float: right;
+}
+.displayList {
+  margin-top: 50px;
+}
+.displayList h1, h3, h4, h5 {
+  display: inline-block;
+}
+.displayOptions h3, button, input {
+  display: inline;
+  padding-left: 20px;
+  color: green;
+}
+
+.addRun {
+  /*margin: 40px 0 0 23px;*/
+}
+
+.jelly img {
+  width: 100%;
+}
+
+@media (max-width: 760px) {
+  #map {
+    height: 30vh;
+    width: 85vw;
+  }
+  .addRun {
+    margin: auto;
+    display: block;
+  }
+}

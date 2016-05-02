@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html ng-app="riverRun" ng-cloak>
+  <head>
+    <meta charset="utf-8">
+    <title>River Run</title>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.js"></script>
+
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-animate.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
+
+    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="map.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body ng-controller="riverController as rc">
+    <div class="container-fluid">
+      <div class="row">
+        <header class="header col-xs-12">
+          <h1 class="col-xs-10">River Run</h1>
+        </header>
+        <div class="col-xs-12 col-sm-2">
+          <button type="button" class="btn btn-lg btn-success addRun" data-toggle="modal" data-target="#myModal">Add a run</button>
+        </div>
+        <!-- <div class="col-xs-12 col-sm-10 col-sm-offset-6">
+          <h3>Filter by class:</h3>
+          <input type="checkbox" ng-model="rc.classRating3"
+          <h1 ng-click="rc.checkClass()">III</h1>
+          <input type="checkbox" ng-model="rc.classRating4">IV</input>
+          <input type="checkbox" ng-model="rc.classRating5">V</input>
+        </div> -->
+      </div>
+      <!-- <div class="row">
+        <div class="col-xs-12 col-sm-2">
+          <button type="button" class="btn btn-lg btn-primary addRun" data-toggle="modal" data-target="#myModal">Add a run</button>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <div id="map"></div>
+        </div>
+
+        <uib-accordion class="col-xs-12 col-sm-5 displayList">
+        <uib-accordion-group heading="{{ run.riverName }} - {{ run.runName }}" ng-repeat="run in rc.listOfRuns | orderBy : '-riverName' : true">
+          <h3>{{run.runName}}</h3> <br>
+          <h4>Type: {{run.riverType}} </h4><br>
+          <h5>Class: {{ run.riverClass }} </h5> <br>
+          <h5>Notes: {{run.notes}} </h5>
+        </uib-accordion-group>
+        </uib-accordion>
+
+      </div>
+
+      <div id="myModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Fill out form</h4>
+            </div>
+            <div modal-body>
+              <form ng-submit="rc.addRiver()" class="col-xs-8 col-xs-offset-2">
+                <input ng-model="rc.riverName" placeholder="Name of river"></input>
+                <input ng-model="rc.runName" placeholder="Name of run"></input>
+                <input ng-model="rc.riverClass" placeholder="Class of run"></input>
+                <input ng-model="rc.riverType" placeholder="Type of run"></input>
+                <input ng-model="rc.rating" placeholder="Rating of run"></input>
+                <input ng-model="rc.notes" placeholder="Notes on run"></textarea>
+                <input ng-model="rc.riverLocation" placeholder="Locaton of run"></input>
+                <button type="submit" class="btn">Submit</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-submit" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 jelly">
+        </div>
+      </div>
+              <!--           SCRIPTS          -->
+      <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+    </div>
+  </body>
+</html>
