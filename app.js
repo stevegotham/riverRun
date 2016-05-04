@@ -15,6 +15,7 @@
       rc.notes
       rc.riverLocation
       rc.classRating
+      rc.destination
       rc.mapCenter = [39.736011,-105.019184]
       rc.zoom = 6
 
@@ -42,7 +43,7 @@
 
       rc.run1 = new River('Arkansas River', 'Royal Gorge', 'IV', 'river',null, ['38.4861078','-105.3727707'], '07094500').save()
       rc.run2 = new River('Arkansas River', 'Bighorn Sheep Canyon', 'III', 'river','Great fun run', ['38.447475','-105.522723'], '07094500').save()
-      rc.run3 = new River('Animas River, Upper', 'Upper Animas', 'IV-V','river', null, ['37.802641','-107.672806'], '09359020').save()
+      rc.run3 = new River('Animas River', 'Upper Animas', 'IV-V','river', null, ['37.802641','-107.672806'], '09359020').save()
       rc.run4 = new River('Arkansas River','Brown\'s Canyon','II-IV','river', null, ['38.7528617163','-106.0700207949'], '07091200').save()
       rc.run5 = new River('Clear Creek, S. Platte','Black Rock','V','creek', null, ['39.741437','-105.329157'], '06719505').save()
       rc.run6 = new River('Clear Creek, S. Platte', 'Upper Clear Creek', 'IV', 'creek', null, ['39.745562','-105.434856'], '06719505').save()
@@ -81,6 +82,9 @@
       }
       rc.getAllLevels();
 
+      rc.remove = function(run) {
+        rc.listOfRuns.splice(rc.listOfRuns.indexOf(run),1)
+      }
       // =============== map functions =============
 
        // creates the map
@@ -95,6 +99,11 @@
       // opens the display list for the corresponding marker
       rc.focus = function(evt, run) {
         run.open = true
+      }
+
+      rc.getDirections = function(run) {
+        rc.destination = run.riverLocation
+        $('#move').css('background-color', '#fff')
       }
 
 // ============================== closing tag ============================= //

@@ -1,15 +1,26 @@
 ng-map {
-  height: 50vh;
-  width: 35vw;
+  height: 44vh;
+  width: 60vw;
   border: 2px lightgrey solid;
   border-radius: 5px;
-  margin: 50px 0 0 25px;
+  margin: 50px 0 0 60px;
 }
 
 body {
   background-image: url('http://southerngaragebands.com/rapids.JPG');
   background-size: cover;
-  overflow: scroll;
+  /*overflow: scroll;*/
+  font-family: 'days one', 'sans-serif';
+}
+
+uib-accordion-group button {
+
+}
+
+#move {
+  width: 40vw;
+  height: 100%;
+  margin: 15px 0 25px 60px;
 }
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
@@ -18,19 +29,16 @@ body {
   width: 100%;
 }
 .header h1 {
-  font-family: arial black;
-  font-size: 72px;
+  font-size: 76px;
   color: #023866;
   margin-left: 50px;
 }
-.right {
-  float: right;
-}
+
 .displayList {
   margin-top: 50px;
 }
 .displayList h1, h3, h4, h5 {
-  display: inline-block;
+  display: block;
 }
 .displayOptions span {
   display: block;
@@ -60,15 +68,17 @@ body {
   background-color: #337AB7;
   color: #fff;
 }
-.remove {
-  /*float: right;
-  /*position: relative;
-  left: 80%;*/
+
+.bg-info {
+  border-radius: 5px;
+  margin-top: 15px;
 }
+
 @media (max-width: 760px) {
   ng-map {
     height: 30vh;
     width: 85vw;
+    margin-left: 25px;
   }
   .addRun {
     margin: auto;
@@ -79,8 +89,11 @@ body {
   }
 
 }
-@media (max-width: 480px) {
+@media (max-width: 540px) {
   .header h1 {
     font-size: 56px;
+  }
+  ng-map {
+    margin-left: 15px;
   }
 }

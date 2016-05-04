@@ -2,7 +2,7 @@
 <html ng-app="riverRun" ng-cloak>
   <head>
     <meta charset="utf-8">
-    
+
     <title>River Run</title>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.js"></script>
@@ -16,6 +16,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Days+One" />
 
   </head>
   <body ng-controller="riverController as rc">
@@ -33,22 +34,36 @@
       </div>
 
       <div class="row">
-        <div class="col-xs-12 col-sm-6">
-          <ng-map center="{{ rc.mapCenter }}" zoom="{{ rc.zoom }}">
-            <marker ng-repeat="run in rc.listOfRuns" position="{{ run.riverLocation }}" on-click="rc.focus(run)"></marker>
-          </ng-map>
+        <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 bg-info">
+          <h3>Welcome to River Run!</h3>
+          <p>River Run is an application designed for you to keep track of the kayaying runs you love. Click on any marker on the map to display the information for that run, or click on any run name in the list to see the information as well as center the map on the corresponding marker.</p>
         </div>
-        <uib-accordion class="col-xs-12 col-sm-5 displayList">
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-8">
+          <ng-map center="{{ rc.mapCenter }}" zoom="{{ rc.zoom }}" map-type-id="hybrid">
+            <marker ng-repeat="run in rc.listOfRuns" position="{{ run.riverLocation }}" on-click="rc.focus(run)" track-by="$index"></marker>
+            <directions travel-mode="DRIVING" origin="current-location" destination="{{ rc.destination }}" panel="move"></directions>
+          </ng-map>
+          <div id="move"></div>
+        </div>
+
+
+        <uib-accordion class="col-xs-12 col-sm-3 displayList">
           <uib-accordion-group heading="{{ run.riverName }} - {{ run.runName }}" ng-repeat="run in rc.listOfRuns | orderBy : '-riverName' : true" ng-click="rc.centerMap(run)" is-open="run.open">
             <h3>{{ run.runName }}</h3> <br>
             <h4>Type: {{ run.riverType }} </h4><br>
             <h5>Class: {{ run.riverClass }} </h5> <br>
             <h5>Notes: {{ run.notes }} </h5> <br>
             <h4>Water flow: <span class="cfs"> {{ run.waterLevel }}</span> cf/s<h4>
-            <button class="btn btn-danger remove">Delete Run</button>
+            <button class="btn btn-danger pull-right" ng-click="rc.remove(run)">Delete Run</button>
+            <button class="btn btn-info pull-left" ng-click="rc.getDirections(run)">Get Directions</button>
           </uib-accordion-group>
         </uib-accordion>
       </div>
+
+
 
       <div id="myModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -58,8 +73,8 @@
             </div>
             <div class="modal-body">
               <form ng-submit="rc.addRiver()" class="form">
-                <input ng-model="rc.riverName" placeholder="Name of river"></input>
-                <input ng-model="rc.runName" placeholder="Name of run"></input>
+                <input ng-model="rc.riverName" placeholder="Name of river" required="true"></input>
+                <input ng-model="rc.runName" placeholder="Name of run" required="true"></input>
                 <input ng-model="rc.riverClass" placeholder="Class of run"></input>
                 <input ng-model="rc.riverType" placeholder="Type (river or creek)"></input>
                 <input ng-model="rc.notes" placeholder="Personal notes"></input>
