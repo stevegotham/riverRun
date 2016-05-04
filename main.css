@@ -9,7 +9,9 @@ ng-map {
 body {
   background-image: url('http://southerngaragebands.com/rapids.JPG');
   background-size: cover;
+  overflow: scroll;
 }
+
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 .header {
@@ -71,6 +73,9 @@ body {
   .addRun {
     margin: auto;
     display: block;
+  }
+  body {
+    overflow: visible;
   }
 
 }
