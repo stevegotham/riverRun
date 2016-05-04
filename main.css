@@ -13,10 +13,6 @@ body {
   font-family: 'days one', 'sans-serif';
 }
 
-uib-accordion-group button {
-
-}
-
 #move {
   width: 40vw;
   height: 100%;
@@ -28,6 +24,7 @@ uib-accordion-group button {
 .header {
   width: 100%;
 }
+
 .header h1 {
   font-size: 76px;
   color: #023866;
@@ -37,31 +34,39 @@ uib-accordion-group button {
 .displayList {
   margin-top: 50px;
 }
+
 .displayList h1, h3, h4, h5 {
   display: block;
 }
+
 .displayOptions span {
   display: block;
 }
+
 .cfs {
   color: blue;
 }
+
 .show {
   border: 3px red solid;
 }
+
 .addRun {
   background-color: #023866;
   color: #fff;
   margin-top: 44px;
   border: 3px #337AB7 solid;
 }
+
 .action button:focus, .action button:hover, .modal-footer button:hover {
   color: #fff;
 }
+
 .form input {
   margin: 5px;
   border-radius: 3px;
 }
+
 .form button {
   display: block;
   margin: 5px 0 0 5px;
@@ -72,6 +77,10 @@ uib-accordion-group button {
 .bg-info {
   border-radius: 5px;
   margin-top: 15px;
+}
+
+.clear {
+  margin-top: 10px;
 }
 
 @media (max-width: 760px) {
@@ -87,7 +96,6 @@ uib-accordion-group button {
   body {
     overflow: visible;
   }
-
 }
 @media (max-width: 540px) {
   .header h1 {

@@ -1,13 +1,13 @@
 (function() {
-  angular.module('riverRun', ['ui.bootstrap','ngMap','ngAnimate'])
-    .controller('riverController', ['$http','NgMap', riverControllerFunction])
+  angular.module('riverRun', ['ui.bootstrap','ngMap','ngAnimate','ngStorage'])
+    .controller('riverController', ['$http','NgMap', '$localStorage', 'myFactory', riverControllerFunction])
 
-    function riverControllerFunction($http,NgMap) {
+    function riverControllerFunction($http, NgMap, $localStorage, myFactory) {
       var rc = this
 
       // ============  variables  ============
 
-      rc.listOfRuns = []
+      rc.listOfRuns = myFactory.listOfRuns
       rc.riverName
       rc.riverClass
       rc.riverType
@@ -17,7 +17,8 @@
       rc.classRating
       rc.destination
       rc.mapCenter = [39.736011,-105.019184]
-      rc.zoom = 6
+      rc.zoom = 4
+      rc.show = false
 
       // ============  create new river objects   ============
 
@@ -35,21 +36,10 @@
         }
         save () {
           rc.listOfRuns.push(this)
+          $localStorage.runs = rc.listOfRuns
         }
 
       }
-
-      //  ============ populate the list of runs ===============
-
-      rc.run1 = new River('Arkansas River', 'Royal Gorge', 'IV', 'river',null, ['38.4861078','-105.3727707'], '07094500').save()
-      rc.run2 = new River('Arkansas River', 'Bighorn Sheep Canyon', 'III', 'river','Great fun run', ['38.447475','-105.522723'], '07094500').save()
-      rc.run3 = new River('Animas River', 'Upper Animas', 'IV-V','river', null, ['37.802641','-107.672806'], '09359020').save()
-      rc.run4 = new River('Arkansas River','Brown\'s Canyon','II-IV','river', null, ['38.7528617163','-106.0700207949'], '07091200').save()
-      rc.run5 = new River('Clear Creek, S. Platte','Black Rock','V','creek', null, ['39.741437','-105.329157'], '06719505').save()
-      rc.run6 = new River('Clear Creek, S. Platte', 'Upper Clear Creek', 'IV', 'creek', null, ['39.745562','-105.434856'], '06719505').save()
-      rc.run7 = new River('Colorado River', 'Gore Canyon', 'IV-V', 'river', null, ['40.043085','-106.395889'], '09058000').save()
-      rc.run8 = new River('Dolores River', 'Dolores Canyon', 'III-IV', 'river', null, ['37.795352','-108.826227'], '09169500').save()
-      rc.run9 = new River('Eagle River', 'Upper Eagle', 'III', 'river', null, ['39.588027','-106.430115'], '09064600').save()
 
       // ============  functions  ============
 
@@ -101,9 +91,16 @@
         run.open = true
       }
 
+      //  opens the directions to run marker, shows route on map
       rc.getDirections = function(run) {
         rc.destination = run.riverLocation
+        rc.show = true
         $('#move').css('background-color', '#fff')
+      }
+
+      // clears/hides the directions div
+      rc.removeDirections = function() {
+        rc.show = false
       }
 
 // ============================== closing tag ============================= //

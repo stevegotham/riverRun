@@ -12,7 +12,9 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
     <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
+    <script type="text/javascript" src="bower_components/ngstorage/ngStorage.js"></script>
     <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="factory.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="main.css">
@@ -46,7 +48,8 @@
             <marker ng-repeat="run in rc.listOfRuns" position="{{ run.riverLocation }}" on-click="rc.focus(run)" track-by="$index"></marker>
             <directions travel-mode="DRIVING" origin="current-location" destination="{{ rc.destination }}" panel="move"></directions>
           </ng-map>
-          <div id="move"></div>
+          <button ng-show="rc.show" ng-click="rc.removeDirections()" class="btn btn-danger pull-right clear">Remove directions</button>
+          <div id="move" ng-show="rc.show"></div>
         </div>
 
 
@@ -56,7 +59,7 @@
             <h4>Type: {{ run.riverType }} </h4><br>
             <h5>Class: {{ run.riverClass }} </h5> <br>
             <h5>Notes: {{ run.notes }} </h5> <br>
-            <h4>Water flow: <span class="cfs"> {{ run.waterLevel }}</span> cf/s<h4>
+            <h4>Current water flow: <span class="cfs"> {{ run.waterLevel }}</span> cf/s<h4>
             <button class="btn btn-danger pull-right" ng-click="rc.remove(run)">Delete Run</button>
             <button class="btn btn-info pull-left" ng-click="rc.getDirections(run)">Get Directions</button>
           </uib-accordion-group>
