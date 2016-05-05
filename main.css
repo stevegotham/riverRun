@@ -1,38 +1,48 @@
+/*============================ elements ============================*/
 ng-map {
   height: 44vh;
-  width: 60vw;
+  width: 100%;
   border: 2px lightgrey solid;
   border-radius: 5px;
-  margin: 50px 0 0 60px;
 }
 
 body {
   background-image: url('http://southerngaragebands.com/rapids.JPG');
   background-size: cover;
-  /*overflow: scroll;*/
   font-family: 'days one', 'sans-serif';
 }
+/*============================ id's ============================*/
 
-#move {
+#directions {
   width: 40vw;
   height: 100%;
   margin: 15px 0 25px 60px;
 }
+/*============================ classes ============================*/
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
-.header {
-  width: 100%;
+.bg-info {
+  border-radius: 5px;
+  margin-top: 15px;
 }
+/*============================ header ============================*/
 
 .header h1 {
   font-size: 76px;
   color: #023866;
   margin-left: 50px;
 }
+/*============================ explanation paragraph ============================*/
+
+.info {
+  margin-left: 5%;
+}
+/*============================ display list ============================*/
 
 .displayList {
-  margin-top: 50px;
+  margin-top: 35px;
+  margin-left: 3%;
 }
 
 .displayList h1, h3, h4, h5 {
@@ -46,10 +56,13 @@ body {
 .cfs {
   color: blue;
 }
+/*============================ map ============================*/
 
-.show {
-  border: 3px red solid;
+.map {
+  margin: 50px 0 0 5%;
+  padding: 0;
 }
+/*============================ buttons ============================*/
 
 .addRun {
   background-color: #023866;
@@ -58,36 +71,61 @@ body {
   border: 3px #337AB7 solid;
 }
 
-.action button:focus, .action button:hover, .modal-footer button:hover {
-  color: #fff;
-}
-
-.form input {
-  margin: 5px;
-  border-radius: 3px;
-}
-
-.form button {
+.addButton {
   display: block;
   margin: 5px 0 0 5px;
   background-color: #337AB7;
   color: #fff;
 }
 
-.bg-info {
-  border-radius: 5px;
-  margin-top: 15px;
+.updateButton {
+  display: block;
+  background-color: #337AB7;
+  color: #fff;
+  margin-left: 5%;
+}
+
+.deleteButton {
+  display: block;
+  margin-right: 5%;
+}
+
+.action button:focus, .action button:hover, .modal-footer button:hover {
+  color: #fff;
+}
+
+.subButtons button {
+  margin-left: 5%;
 }
 
 .clear {
   margin-top: 10px;
 }
+/*============================ form inputs ============================*/
 
+.form input {
+  margin: 5px;
+  border-radius: 3px;
+}
+/*============================ media queries ============================*/
+
+@media (max-width: 990px) {
+  ng-map {
+    height: 44vh;
+  }
+  #directions {
+    width: 60vw;
+    height: 100%;
+    margin-left: 60px;
+  }
+  .displayList {
+    margin-left: 0;
+  }
+}
 @media (max-width: 760px) {
   ng-map {
     height: 30vh;
-    width: 85vw;
-    margin-left: 25px;
+    /*margin-left: 25px;*/
   }
   .addRun {
     margin: auto;
@@ -96,12 +134,19 @@ body {
   body {
     overflow: visible;
   }
+  #directions {
+    width: 60vw;
+    height: 100%;
+    margin-left: 60px;
+  }
 }
 @media (max-width: 540px) {
   .header h1 {
     font-size: 56px;
   }
-  ng-map {
-    margin-left: 15px;
+  #directions {
+    width: 80vw;
+    height: 100%;
+    margin-left: 20px;
   }
 }

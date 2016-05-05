@@ -11,12 +11,10 @@
       rc.riverName
       rc.riverClass
       rc.riverType
-      rc.rating
       rc.notes
       rc.riverLocation
-      rc.classRating
       rc.destination
-      rc.mapCenter = [39.736011,-105.019184]
+      rc.mapCenter = 'current-location'
       rc.zoom = 4
       rc.show = false
 
@@ -52,8 +50,18 @@
         rc.riverType = ''
         rc.notes = ''
         rc.riverLocation = ''
+        // gets water level once added
+        rc.getAllLevels()
         // exits the modal on submit
         $('#myModal').modal('hide')
+      }
+
+      // edits the River object
+      rc.editRun = function() {
+        $('#myModal2').modal('hide')
+      }
+      rc.portRun = function(run) {
+        rc.runIndex = rc.listOfRuns.indexOf(run)
       }
 
       // the function to get a water level from usgs database
@@ -72,9 +80,11 @@
       }
       rc.getAllLevels();
 
+      // removes the run from the list of runs
       rc.remove = function(run) {
         rc.listOfRuns.splice(rc.listOfRuns.indexOf(run),1)
       }
+
       // =============== map functions =============
 
        // creates the map
@@ -91,11 +101,11 @@
         run.open = true
       }
 
-      //  opens the directions to run marker, shows route on map
+      // opens the directions to run marker, shows route on map
       rc.getDirections = function(run) {
         rc.destination = run.riverLocation
         rc.show = true
-        $('#move').css('background-color', '#fff')
+        $('#directions').css('background-color', '#fff')
       }
 
       // clears/hides the directions div
@@ -103,6 +113,6 @@
         rc.show = false
       }
 
-// ============================== closing tag ============================= //
+// ============================== closing tags ============================= //
     }
 })();

@@ -2,13 +2,11 @@
 <html ng-app="riverRun" ng-cloak>
   <head>
     <meta charset="utf-8">
-
     <title>River Run</title>
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.js"></script>
     <script  src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular-animate.js"></script>
     <script src="/bower_components/ngmap/build/scripts/ng-map.js"></script>
-    <script src="http://maps.google.com/maps/api/js"></script>
+    <script src="https://maps.google.com/maps/api/js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
     <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
@@ -23,7 +21,7 @@
   </head>
   <body ng-controller="riverController as rc">
     <div class="container-fluid">
-
+      <!--==================== header ==================== -->
       <div class="row">
         <header class="header col-xs-12">
           <div class="col-xs-12 col-sm-9">
@@ -34,40 +32,43 @@
           </div>
         </header>
       </div>
-
+      <!--==================== intro paragraph ==================== -->
       <div class="row">
-        <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 bg-info">
+        <div class="col-xs-11 col-md-7 bg-info info">
           <h3>Welcome to River Run!</h3>
-          <p>River Run is an application designed for you to keep track of the kayaying runs you love. Click on any marker on the map to display the information for that run, or click on any run name in the list to see the information as well as center the map on the corresponding marker.</p>
+          <p>River Run is an application designed for you to keep track of the kayaying runs you love. Click on any marker on the map to display the information for that run, or click on any run name in the list to see the information and center the map on the corresponding marker.</p>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-xs-12 col-sm-8">
+        <!--==================== map ==================== -->
+        <div class="col-xs-11 col-md-7 map">
           <ng-map center="{{ rc.mapCenter }}" zoom="{{ rc.zoom }}" map-type-id="hybrid">
-            <marker ng-repeat="run in rc.listOfRuns" position="{{ run.riverLocation }}" on-click="rc.focus(run)" track-by="$index"></marker>
-            <directions travel-mode="DRIVING" origin="current-location" destination="{{ rc.destination }}" panel="move"></directions>
+            <marker ng-repeat="run in rc.listOfRuns" position="{{ run.riverLocation }}" on-click="rc.focus(run)" track-by="$index" icon="images/kayakicon.png"></marker>
+            <directions travel-mode="DRIVING" origin="current-location" destination="{{ rc.destination }}" panel="directions"></directions>
           </ng-map>
           <button ng-show="rc.show" ng-click="rc.removeDirections()" class="btn btn-danger pull-right clear">Remove directions</button>
-          <div id="move" ng-show="rc.show"></div>
+          <div id="directions" ng-show="rc.show"></div>
         </div>
-
-
-        <uib-accordion class="col-xs-12 col-sm-3 displayList">
-          <uib-accordion-group heading="{{ run.riverName }} - {{ run.runName }}" ng-repeat="run in rc.listOfRuns | orderBy : '-riverName' : true" ng-click="rc.centerMap(run)" is-open="run.open">
+        <!--==================== display list ==================== -->
+        <uib-accordion class="col-xs-12 col-md-3 displayList">
+          <uib-accordion-group heading="{{ run.riverName }} - {{ run.runName }}" ng-repeat="run in rc.listOfRuns | orderBy : '-riverName' : true" ng-click="rc.centerMap(run)" is-open="run.open" class="bg-info">
             <h3>{{ run.runName }}</h3> <br>
             <h4>Type: {{ run.riverType }} </h4><br>
-            <h5>Class: {{ run.riverClass }} </h5> <br>
-            <h5>Notes: {{ run.notes }} </h5> <br>
-            <h4>Current water flow: <span class="cfs"> {{ run.waterLevel }}</span> cf/s<h4>
-            <button class="btn btn-danger pull-right" ng-click="rc.remove(run)">Delete Run</button>
-            <button class="btn btn-info pull-left" ng-click="rc.getDirections(run)">Get Directions</button>
+            <h5>Class: {{ run.riverClass }}</h5> <br>
+            <h5>Notes: {{ run.notes }}</h5> <br>
+            <h4>Current water flow: <span class="cfs">{{ run.waterLevel }}</span> cf/s<h4>
+            <div class="row subButtons">
+              <button class="btn btn-info col-xs-5" ng-click="rc.getDirections(run)">Directions</button>
+              <button class="btn btn-primary col-xs-5" data-toggle="modal" data-target="#myModal2" ng-click="rc.portRun(run)">Edit Run</button>
+            </div>
           </uib-accordion-group>
         </uib-accordion>
+
       </div>
+      <!--==================== modals ==================== -->
 
-
-
+      <!--==================== add run modal ====================-->
       <div id="myModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -82,13 +83,39 @@
                 <input ng-model="rc.riverType" placeholder="Type (river or creek)"></input>
                 <input ng-model="rc.notes" placeholder="Personal notes"></input>
                 <input ng-model="rc.riverLocation" placeholder="Locaton (lat,long)"></input>
-                <button type="submit" class="btn">Submit</button>
+                <span style="display:block;">For water flows you need to input the 8-digit USGS site number, in quotes:</span><input ng-model="rc.stationId" placeholder="ex: '11510700'"></input>
+                <button type="submit" class="btn addButton">Submit</button>
               </form>
             </div>
           </div>
         </div>
       </div>
-
+      <!--==================== edit run modal ====================-->
+      <div id="myModal2" class="modal fade" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Only fill the entries you want to update</h4>
+            </div>
+            <div class="modal-body">
+              <form ng-submit="rc.editRun()" class="form">
+                <input ng-model="rc.listOfRuns[rc.runIndex].riverName" required="true"></input>
+                <input ng-model="rc.listOfRuns[rc.runIndex].runName" required="true"></input>
+                <input ng-model="rc.listOfRuns[rc.runIndex].riverClass" placeholder="Class of run"></input>
+                <input ng-model="rc.listOfRuns[rc.runIndex].riverType" placeholder="Type (river or creek)"></input>
+                <input ng-model="rc.listOfRuns[rc.runIndex].notes" placeholder="Personal notes"></input>
+                <input ng-model="rc.listOfRuns[rc.runIndex].riverLocation" placeholder="Locaton (lat,long)"></input>
+                <span style="display:block;">For water flows you need to input the 8-digit USGS site number, in quotes:</span><input ng-model="rc.listOfRuns[rc.runIndex].stationId"></input>
+                <div class="row">
+                  <button type="submit" class="col-xs-2 btn updateButton">Submit</button>
+                  <button ng-click="rc.remove(run)" class="col-xs-2 btn btn-danger bg-danger pull-right deleteButton">Delete</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!--==================== closing tags ==================== -->
     </div>
   </body>
 </html>

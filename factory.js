@@ -17,7 +17,7 @@ angular.module('riverRun')
         runName: 'Bighorn Sheep Canyon',
         riverClass: 'III',
         riverType: 'river',
-        notes: null,
+        notes: 'Where I learned to guide. Still one of my favorite runs ever. Simply awesome in a 5 foot kayak at 5400 cfs',
         riverLocation: ['38.447475','-105.522723'],
         stationId: '07094500'
       },
@@ -83,6 +83,33 @@ angular.module('riverRun')
         notes: null,
         riverLocation: ['39.588027','-106.430115'],
         stationId: '09064600'
+      },
+      {
+        riverName:'Selway River',
+        runName: 'Paradise to Selway Falls',
+        riverClass: 'IV',
+        riverType: 'river',
+        notes: 'Hands down the most amazing trip I\'ve ever taken. Four days with my brother and seven other rafting buddies. Favorite quote from the trip: "People in Idaho must love that their state is know for potatoes, instead of having the sickest fucking wilderness in the west." - Kirchner',
+        riverLocation: ['45.861434','-114.738511'],
+        stationId: '13336500'
+      },
+      {
+        riverName:'Smith River',
+        runName: 'Steven Memorial Bridge',
+        riverClass: 'III-V',
+        riverType: 'river',
+        notes: 'Gorgeous river. I dream of a three week fly fishing trip there someday.',
+        riverLocation: ['41.796878','-124.054392'],
+        stationId: '11532500'
+      },
+      {
+        riverName:'Gauley River',
+        runName: 'Upper Gauley',
+        riverClass: 'IV-V',
+        riverType: 'river',
+        notes: 'Had the time of my life with Greg, Dylan, and Spencer, and have the scars to prove it',
+        riverLocation: ['38.222332','-80.890654'],
+        stationId: '03189600'
       },
 
     ]
