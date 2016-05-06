@@ -24,19 +24,20 @@
       <!--==================== header ==================== -->
       <div class="row">
         <header class="header col-xs-12">
-          <div class="col-xs-12 col-sm-9">
+          <div class="col-xs-12 col-sm-8">
             <h1>River Run</h1>
           </div>
-          <div class="col-xs-12 col-sm-2 action">
+          <div class="col-xs-12 col-sm-4 action">
             <button type="button" class="btn btn-lg addRun" data-toggle="modal" data-target="#myModal">Add a run</button>
           </div>
         </header>
       </div>
       <!--==================== intro paragraph ==================== -->
-      <div class="row">
-        <div class="col-xs-11 col-md-7 bg-info info">
+      <div class="row" ng-show="rc.ok">
+        <div class="col-xs-11 col-md-7 info">
           <h3>Welcome to River Run!</h3>
           <p>River Run is an application designed for you to keep track of the kayaying runs you love. Click on any marker on the map to display the information for that run, or click on any run name in the list to see the information and center the map on the corresponding marker.</p>
+          <button type="checkbox" ng-click="rc.gotcha()" class="btn btn-sm pull-right">Ok</button>
         </div>
       </div>
 
@@ -48,11 +49,11 @@
             <directions travel-mode="DRIVING" origin="current-location" destination="{{ rc.destination }}" panel="directions"></directions>
           </ng-map>
           <button ng-show="rc.show" ng-click="rc.removeDirections()" class="btn btn-danger pull-right clear">Remove directions</button>
-          <div id="directions" ng-show="rc.show"></div>
+          <div id="directions" ng-show="rc.show" class="col-xs-11 col-sm-4 show"></div>
         </div>
         <!--==================== display list ==================== -->
-        <uib-accordion class="col-xs-12 col-md-3 displayList">
-          <uib-accordion-group heading="{{ run.riverName }} - {{ run.runName }}" ng-repeat="run in rc.listOfRuns | orderBy : '-riverName' : true" ng-click="rc.centerMap(run)" is-open="run.open" class="bg-info">
+        <uib-accordion class="col-xs-11 col-md-3 displayList">
+          <uib-accordion-group heading="{{ run.riverName }} - {{ run.runName }}" ng-repeat="run in rc.listOfRuns | orderBy : '-riverName' : true" ng-click="rc.centerMap(run)" is-open="run.open">
             <h3>{{ run.runName }}</h3> <br>
             <h4>Type: {{ run.riverType }} </h4><br>
             <h5>Class: {{ run.riverClass }}</h5> <br>

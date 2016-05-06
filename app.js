@@ -17,6 +17,7 @@
       rc.mapCenter = 'current-location'
       rc.zoom = 4
       rc.show = false
+      rc.ok = true
 
       // ============  create new river objects   ============
 
@@ -41,6 +42,11 @@
 
       // ============  functions  ============
 
+      // removes the informational div
+      rc.gotcha = function() {
+        rc.ok = false
+      }
+
       // creates a new River object and adds the river from the form to the array and then clears the form
       rc.addRiver = function() {
         var river = new River(rc.riverName, rc.runName, rc.riverClass, rc.riverType, rc.notes, rc.riverLocation, rc.stationId).save()
@@ -56,10 +62,11 @@
         $('#myModal').modal('hide')
       }
 
-      // edits the River object
+      // exits the modal when you update run, updating is actually done via ng-model
       rc.editRun = function() {
         $('#myModal2').modal('hide')
       }
+      // gets the index of the run you want to edit, to be used in the "edit run" form
       rc.portRun = function(run) {
         rc.runIndex = rc.listOfRuns.indexOf(run)
       }
@@ -83,6 +90,8 @@
       // removes the run from the list of runs
       rc.remove = function(run) {
         rc.listOfRuns.splice(rc.listOfRuns.indexOf(run),1)
+        // exits modal on submit
+        $('#myModal2').modal('hide')
       }
 
       // =============== map functions =============
