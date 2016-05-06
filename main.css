@@ -14,10 +14,8 @@ body {
 /*============================ id's ============================*/
 
 #directions {
-  /*width: 40vw;*/
   width: 100%;
   height: 100%;
-  /*margin: 15px 0 25px 60px;*/
 }
 /*============================ classes ============================*/
 
@@ -53,14 +51,6 @@ body {
 .info h3, p {
   margin-top: 10px;
 }
-.info button {
-  background-color: #023866;
-  color: #fff;
-  margin-bottom: 5px;
-}
-.info button:hover {
-  color: #fff;
-}
 /*============================ display list ============================*/
 
 .displayList {
@@ -75,6 +65,11 @@ body {
 
 .displayOptions span {
   display: block;
+}
+
+.list {
+  display: block;
+  margin-top: -10px;
 }
 
 .cfs {
@@ -93,7 +88,6 @@ body {
   color: #fff;
   margin-top: 44px;
   margin-left: 14px;
-  border: 3px #337AB7 solid;
 }
 
 .addButton {
@@ -115,7 +109,13 @@ body {
   margin-right: 5%;
 }
 
-.action button:focus, .action button:hover, .modal-footer button:hover {
+.info button {
+  background-color: #023866;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.action button:focus, .action button:hover, .modal-footer button:hover, .info button:hover, .addButton:hover, .updateButton:hover, .deleteButton:hover {
   color: #fff;
 }
 
@@ -126,29 +126,26 @@ body {
 .clear {
   margin-top: 10px;
 }
-/*============================ form inputs ============================*/
+/*============================ form items ============================*/
 
 .form input {
   margin: 5px;
   border-radius: 3px;
 }
+.form span {
+  display: block;
+}
 /*============================ media queries ============================*/
 
-@media (max-width: 990px) {
-  ng-map {
-    height: 44vh;
-  }
-}
 @media (max-width: 760px) {
   ng-map {
     height: 30vh;
+    margin-top: -25px;
   }
   .addRun {
     margin: auto;
+    margin-top: 5px;
     display: block;
-  }
-  body {
-    overflow: visible;
   }
 }
 @media (max-width: 540px) {

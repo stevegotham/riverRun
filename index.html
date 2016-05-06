@@ -55,10 +55,10 @@
         <uib-accordion class="col-xs-11 col-md-3 displayList">
           <uib-accordion-group heading="{{ run.riverName }} - {{ run.runName }}" ng-repeat="run in rc.listOfRuns | orderBy : '-riverName' : true" ng-click="rc.centerMap(run)" is-open="run.open">
             <h3>{{ run.runName }}</h3> <br>
-            <h4>Type: {{ run.riverType }} </h4><br>
-            <h5>Class: {{ run.riverClass }}</h5> <br>
-            <h5>Notes: {{ run.notes }}</h5> <br>
-            <h4>Current water flow: <span class="cfs">{{ run.waterLevel }}</span> cf/s<h4>
+            <span class="list">Type: {{ run.riverType }} </span><br>
+            <span class="list">Class: {{ run.riverClass }}</span> <br>
+            <span class="list">Notes: {{ run.notes }}</span> <br>
+            <span class="list">Current water flow: <span class="cfs">{{ run.waterLevel }}</span> cf/s<span>
             <div class="row subButtons">
               <button class="btn btn-info col-xs-5" ng-click="rc.getDirections(run)">Directions</button>
               <button class="btn btn-primary col-xs-5" data-toggle="modal" data-target="#myModal2" ng-click="rc.portRun(run)">Edit Run</button>
@@ -67,9 +67,10 @@
         </uib-accordion>
 
       </div>
+
       <!--==================== modals ==================== -->
 
-      <!--==================== add run modal ====================-->
+      <!--==================== 'add run' modal ====================-->
       <div id="myModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -84,14 +85,14 @@
                 <input ng-model="rc.riverType" placeholder="Type (river or creek)"></input>
                 <input ng-model="rc.notes" placeholder="Personal notes"></input>
                 <input ng-model="rc.riverLocation" placeholder="Locaton (lat,long)"></input>
-                <span style="display:block;">For water flows you need to input the 8-digit USGS site number, in quotes:</span><input ng-model="rc.stationId" placeholder="ex: '11510700'"></input>
+                <span>For water flows you need to input the 8-digit USGS site number:</span><input ng-model="rc.stationId" placeholder="ex: 11510700"></input>
                 <button type="submit" class="btn addButton">Submit</button>
               </form>
             </div>
           </div>
         </div>
       </div>
-      <!--==================== edit run modal ====================-->
+      <!--==================== 'edit run' modal ====================-->
       <div id="myModal2" class="modal fade" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -106,7 +107,7 @@
                 <input ng-model="rc.listOfRuns[rc.runIndex].riverType" placeholder="Type (river or creek)"></input>
                 <input ng-model="rc.listOfRuns[rc.runIndex].notes" placeholder="Personal notes"></input>
                 <input ng-model="rc.listOfRuns[rc.runIndex].riverLocation" placeholder="Locaton (lat,long)"></input>
-                <span style="display:block;">For water flows you need to input the 8-digit USGS site number, in quotes:</span><input ng-model="rc.listOfRuns[rc.runIndex].stationId"></input>
+                <span>For water flows you need to input the 8-digit USGS site number:</span><input ng-model="rc.listOfRuns[rc.runIndex].stationId" placeholder="ex: 11510700"></input>
                 <div class="row">
                   <button type="submit" class="col-xs-2 btn updateButton">Submit</button>
                   <button ng-click="rc.remove(run)" class="col-xs-2 btn btn-danger bg-danger pull-right deleteButton">Delete</button>
