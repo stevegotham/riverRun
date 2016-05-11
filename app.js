@@ -42,6 +42,16 @@
 
       // ============  functions  ============
 
+      // hides #myModal
+      rc.hideModal = function() {
+        $('#myModal').modal('hide')
+      }
+
+      // hides #myModal2
+      rc.hideModal2 = function() {
+        $('#myModal2').modal('hide')
+      }
+
       // removes the informational div
       rc.gotcha = function() {
         rc.ok = false
@@ -59,13 +69,9 @@
         // gets water level once added
         rc.getAllLevels()
         // exits the modal on submit
-        $('#myModal').modal('hide')
+        rc.hideModal()
       }
 
-      // exits the modal when you update run, updating is actually done via ng-model
-      rc.editRun = function() {
-        $('#myModal2').modal('hide')
-      }
       // gets the index of the run you want to edit, to be used in the "edit run" form
       rc.portRun = function(run) {
         rc.runIndex = rc.listOfRuns.indexOf(run)
@@ -91,7 +97,7 @@
       rc.remove = function(run) {
         rc.listOfRuns.splice(rc.listOfRuns.indexOf(run),1)
         // exits modal on submit
-        $('#myModal2').modal('hide')
+        rc.hideModal2()
       }
 
       // =============== map functions =============
