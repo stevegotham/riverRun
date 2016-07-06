@@ -57,7 +57,7 @@
         rc.ok = false
       }
 
-      // creates a new River object and adds the river from the form to the array and then clears the form
+      // creates a new River object, pushes it to the array, and then clears the form
       rc.addRiver = function() {
         var river = new River(rc.riverName, rc.runName, rc.riverClass, rc.riverType, rc.notes, rc.riverLocation, rc.stationId).save()
         rc.riverName = ''
@@ -85,12 +85,13 @@
           })
       }
 
-      // gets water levels for all existing runs on page load
+      // gets water levels for all existing runs
       rc.getAllLevels = function() {
         for (var i=0; i<rc.listOfRuns.length; i++) {
           rc.getRiverLevel(rc.listOfRuns[i])
         }
       }
+      // get levels on page load
       rc.getAllLevels();
 
       // removes the run from the list of runs
